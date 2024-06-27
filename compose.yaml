@@ -4,6 +4,9 @@ services:
     container_name: container-pg
     build: ./postgres-build
     hostname: localhost
+    env_file:
+      - path: ./.env
+        required: true
     ports:
       - 5432:5432
     volumes:
