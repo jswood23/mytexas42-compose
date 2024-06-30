@@ -48,6 +48,30 @@ services:
     ports:
       - ${BACKEND_PRODUCTION_PORT}:8080
     restart: unless-stopped
+  frontend-staging:
+    container_name: container-frontend-staging
+    build: ${FRONTEND_STAGING_REPO}
+    hostname: ${HOST_NAME}
+    env_file:
+      - path: ./.env
+        required: true
+    environment:
+      - ENVIRONMENT=staging
+    ports:
+        - ${FRONTEND_STAGING_PORT}:3000
+    restart: unless-stopped
+  frontend-production:
+    container_name: container-frontend-production
+    build: ${FRONTEND_PRODUCTION_REPO}
+    hostname: ${HOST_NAME}
+    env_file:
+      - path: ./.env
+        required: true
+    environment:
+        - ENVIRONMENT=production
+    ports:
+        - ${FRONTEND_PRODUCTION_PORT}:3000
+    restart: unless-stopped
   
 
 volumes:
