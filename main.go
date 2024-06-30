@@ -15,6 +15,8 @@ func main() {
 	r.GET("/health", getAppHealth)
 	r.GET("/deploy/staging", deployment.DeployStaging)
 	r.GET("/deploy/production", deployment.DeployProduction)
+	r.GET("/deploy/all", deployment.DeployAll)
+	r.GET("/stop/all", deployment.StopAll)
 
 	err := godotenv.Load()
 	if err != nil {
