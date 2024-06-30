@@ -3,6 +3,7 @@ package deployment
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"os"
 )
 
 func DeployStaging(c *gin.Context) {
@@ -79,6 +80,22 @@ func StopAll(c *gin.Context) {
 		writeError(c, err)
 		return
 	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": "complete",
+	})
+}
+
+func StopCompose(c *gin.Context) {
+	err := checkPermissions(c)
+
+	if err != nil {
+		writeError(c, err)
+		return
+	}
+
+	// stop server here
+	defer os.Exit(0)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": "complete",

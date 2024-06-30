@@ -22,6 +22,7 @@ func main() {
 	r.GET("/deploy/production", deployment.DeployProduction)
 	r.GET("/deploy/all", deployment.DeployAll)
 	r.GET("/stop/all", deployment.StopAll)
+	r.GET("/stop/compose", deployment.StopCompose)
 
 	err = godotenv.Load()
 	if err != nil {
