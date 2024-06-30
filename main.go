@@ -11,6 +11,11 @@ import (
 
 func main() {
 	r := gin.Default()
+	err := r.SetTrustedProxies(nil)
+
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 
 	r.GET("/health", getAppHealth)
 	r.GET("/deploy/staging", deployment.DeployStaging)
@@ -18,7 +23,7 @@ func main() {
 	r.GET("/deploy/all", deployment.DeployAll)
 	r.GET("/stop/all", deployment.StopAll)
 
-	err := godotenv.Load()
+	err = godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
