@@ -5,8 +5,7 @@ services:
     build: ./postgres-build
     hostname: ${HOST_NAME}
     env_file:
-      - path: ./.env
-        required: true
+      - ./.env
     ports:
       - ${POSTGRES_STAGING_PORT}:5432
     volumes:
@@ -17,8 +16,7 @@ services:
     build: ./postgres-build
     hostname: ${HOST_NAME}
     env_file:
-      - path: ./.env
-        required: true
+      - ./.env
     ports:
       - ${POSTGRES_PRODUCTION_PORT}:5432
     volumes:
@@ -29,8 +27,7 @@ services:
     build: ${BACKEND_STAGING_REPO}
     hostname: ${HOST_NAME}
     env_file:
-      - path: ./.env
-        required: true
+      - ./.env
     environment:
       - ENVIRONMENT=staging
     ports:
@@ -41,8 +38,7 @@ services:
     build: ${BACKEND_PRODUCTION_REPO}
     hostname: ${HOST_NAME}
     env_file:
-      - path: ./.env
-        required: true
+      - ./.env
     environment:
       - ENVIRONMENT=production
     ports:
@@ -53,8 +49,7 @@ services:
     build: ${FRONTEND_STAGING_REPO}
     hostname: ${HOST_NAME}
     env_file:
-      - path: ./.env
-        required: true
+      - ./.env
     environment:
       - ENVIRONMENT=staging
     ports:
@@ -65,8 +60,7 @@ services:
     build: ${FRONTEND_PRODUCTION_REPO}
     hostname: ${HOST_NAME}
     env_file:
-      - path: ./.env
-        required: true
+      - ./.env
     environment:
         - ENVIRONMENT=production
     ports:
