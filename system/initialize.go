@@ -4,6 +4,8 @@ import (
 	"errors"
 	"github.com/joho/godotenv"
 	"os"
+	"path/filepath"
+	"strings"
 )
 
 var sshPassphrase string
@@ -42,6 +44,15 @@ func GetPort() string {
 }
 
 func GetSSHKeyPath() string {
+	// Replace ~ with the home directory path
+	if strings.HasPrefix(sshKeyPath, "~") {
+		homeDir, err := os.UserHomeDir()
+		if err != nil {
+			//return errors.New("error retrieving home directory: " + err.Error())
+			println(err)
+		}
+		sshKeyPath = filepath.Join(homeDir, sshKeyPath[1:])
+	}
 	return sshKeyPath
 }
 
