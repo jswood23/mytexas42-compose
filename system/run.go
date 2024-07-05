@@ -5,18 +5,19 @@ import (
 	"errors"
 	"os/exec"
 	"runtime"
+	"strings"
 )
 
-func Run(command string) error {
-	println("Running command: " + command)
+func Run(command string, args ...string) error {
 
-	name := "command"
-	var args []string
+	name := command
 
 	if runtime.GOOS == "windows" {
 		name = "cmd"
-		args = append([]string{"/C"}, command)
+		args = append([]string{"/C"}, command+" "+strings.Join(args, " "))
 	}
+
+	println("Running command: " + name + " " + strings.Join(args, " "))
 
 	cmd := exec.Command(name, args...)
 
