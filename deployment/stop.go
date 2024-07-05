@@ -1,10 +1,12 @@
 package deployment
 
-import "os/exec"
+import (
+	"mytexas42-compose/system"
+)
 
 func stopAll() error {
 	println("Stopping full stack.")
-	_, err := exec.Command("cmd", "/C", "docker compose down").Output()
+	err := system.Run("docker compose down")
 
 	if err != nil {
 		return err

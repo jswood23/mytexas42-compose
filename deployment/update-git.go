@@ -2,8 +2,8 @@ package deployment
 
 import (
 	"fmt"
+	"mytexas42-compose/system"
 	"os"
-	"os/exec"
 )
 
 func updateGit(environment string) error {
@@ -19,13 +19,13 @@ func updateGit(environment string) error {
 		frontendPath = os.Getenv("FRONTEND_PRODUCTION_REPO")
 	}
 
-	_, err := exec.Command("cmd", "/C", fmt.Sprintf("git -C %s/ pull", backendPath)).Output()
+	err := system.Run(fmt.Sprintf("git -C %s/ pull", backendPath))
 
 	if err != nil {
 		return err
 	}
 
-	_, err = exec.Command("cmd", "/C", fmt.Sprintf("git -C %s/ pull", frontendPath)).Output()
+	err = system.Run(fmt.Sprintf("git -C %s/ pull", frontendPath))
 
 	if err != nil {
 		return err

@@ -2,12 +2,12 @@ package deployment
 
 import (
 	"fmt"
-	"os/exec"
+	"mytexas42-compose/system"
 )
 
 func deployAll() error {
 	println("Deploying full stack.")
-	_, err := exec.Command("cmd", "/C", "docker compose up -d").Output()
+	err := system.Run("docker compose up -d")
 
 	if err != nil {
 		return err
@@ -20,29 +20,31 @@ func deployAll() error {
 
 func deployEnvironment(environment string) error {
 	println(fmt.Sprintf("Deploying to %s.", environment))
-	_, err := exec.Command("cmd", "/C", fmt.Sprintf("docker compose build backend-%s", environment)).Output()
+	err := system.Run(fmt.Sprintf("docker compose build backend-%s", environment))
 
 	if err != nil {
 		return err
 	}
 
-	_, err = exec.Command("cmd", "/C", fmt.Sprintf("docker compose up --no-deps -d backend-%s", environment)).Output()
+	err = system.Run(fmt.Sprintf("docker compose up --no-deps -d backend-%s", environment))
 
 	if err != nil {
 		return err
 	}
 
-	_, err = exec.Command("cmd", "/C", fmt.Sprintf("docker compose build frontend-%s", environment)).Output()
+	err = system.Run(fmt.Sprintf("docker compose build frontend-%s", environment))
 
 	if err != nil {
 		return err
 	}
 
-	_, err = exec.Command("cmd", "/C", fmt.Sprintf("docker compose up --no-deps -d frontend-%s", environment)).Output()
+	err = system.Run(fmt.Sprintf("docker compose up --no-deps -d frontend-%s", environment))
 
 	if err != nil {
 		return err
 	}
+
+	println("Deployment complete.")
 
 	return nil
 }

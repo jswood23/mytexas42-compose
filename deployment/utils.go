@@ -24,6 +24,7 @@ func updateAndDeployEnvironment(environment string) error {
 }
 
 func writeError(c *gin.Context, err error) {
+	println(err.Error())
 	c.JSON(http.StatusInternalServerError, gin.H{
 		"status": "error",
 		"reason": err.Error(),
