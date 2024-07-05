@@ -10,12 +10,12 @@ import (
 func Run(command string) error {
 	println("Running command: " + command)
 
-	name := "sudo"
-	args := []string{command}
+	name := "command"
+	var args []string
 
 	if runtime.GOOS == "windows" {
 		name = "cmd"
-		args = append([]string{"/C"}, args...)
+		args = append([]string{"/C"}, command)
 	}
 
 	cmd := exec.Command(name, args...)

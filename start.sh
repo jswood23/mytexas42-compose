@@ -1,1 +1,1 @@
-nohup go run . &
+sudo nohup go run . &
