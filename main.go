@@ -2,15 +2,14 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 	"log"
 	"mytexas42-compose/deployment"
+	"mytexas42-compose/system"
 	"net/http"
-	"os"
 )
 
 func main() {
-	err := deployment.InitializeGit()
+	err := system.Initialize()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -29,13 +28,7 @@ func main() {
 	r.GET("/stop/all", deployment.StopAll)
 	r.GET("/stop/compose", deployment.StopCompose)
 
-	err = godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	port := os.Getenv("CICD_PORT")
-
-	err = r.Run(":" + port)
+	err = r.Run(":" + system.GetPort())
 	if err != nil {
 		log.Fatal(err)
 	}

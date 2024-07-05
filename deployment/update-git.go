@@ -2,25 +2,42 @@ package deployment
 
 import (
 	"fmt"
+	"github.com/go-git/go-git/v5"
+	"github.com/go-git/go-git/v5/plumbing/transport/ssh"
 	"mytexas42-compose/system"
-	"os"
 )
 
 func updateGit(environment string) error {
 	println(fmt.Sprintf("Updating %s from latest version.", environment))
 
-	var backendPath, frontendPath string
-	if environment == "staging" {
-		backendPath = os.Getenv("BACKEND_STAGING_REPO")
-		frontendPath = os.Getenv("FRONTEND_STAGING_REPO")
-	} else {
-		backendPath = os.Getenv("BACKEND_PRODUCTION_REPO")
-		frontendPath = os.Getenv("FRONTEND_PRODUCTION_REPO")
-	}
+	backendPath, frontendPath := system.GetCodePaths(environment)
 
 	// Function to handle git pull and possible dubious ownership error
 	handleGitPull := func(path string) error {
-		return system.Run("git", "-C", path, "pull")
+		//return system.Run("git", "-C", path, "pull")
+		repo, err := git.PlainOpen(path)
+		if err != nil {
+			return err
+		}
+
+		workDir, err := repo.Worktree()
+		if err != nil {
+			return err
+		}
+
+		// Load private SSH key
+		sshKey, err := ssh.NewPublicKeysFromFile("git", system.GetSSHKeyPath(), system.GetSSHPassphrase())
+		if err != nil {
+			return fmt.Errorf("failed to load SSH key: %w", err)
+		}
+
+		// Configure PullOptions with SSH authentication
+		err = workDir.Pull(&git.PullOptions{
+			RemoteName: "origin",
+			Auth:       sshKey,
+		})
+
+		return nil
 	}
 
 	// Update backend repository
