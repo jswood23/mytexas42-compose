@@ -19,13 +19,13 @@ func updateGit(environment string) error {
 		frontendPath = os.Getenv("FRONTEND_PRODUCTION_REPO")
 	}
 
-	err := system.Run("git", fmt.Sprintf("-C %s/ pull", backendPath))
+	err := system.Run("git", fmt.Sprintf("-C %s/", backendPath), "pull")
 
 	if err != nil {
 		return err
 	}
 
-	err = system.Run("git", fmt.Sprintf("-C %s/ pull", frontendPath))
+	err = system.Run("git", fmt.Sprintf("-C %s/", frontendPath), "pull")
 
 	if err != nil {
 		return err
