@@ -10,8 +10,13 @@ import (
 )
 
 func main() {
+	err := deployment.InitializeGit()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	r := gin.Default()
-	err := r.SetTrustedProxies(nil)
+	err = r.SetTrustedProxies(nil)
 
 	if err != nil {
 		log.Fatal(err.Error())
