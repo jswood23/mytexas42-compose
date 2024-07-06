@@ -82,6 +82,7 @@ services:
       - ./nginx:/etc/nginx:ro
       - ./nginx/webroot:/var/www/html
   certbot:
+    container_name: container-certbot
     image: certbot/certbot
     volumes:
       - ./nginx/conf:/etc/nginx:ro
