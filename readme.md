@@ -29,3 +29,21 @@ To manually deploy production, run the following command:
 docker compose build backend-production
 docker compose up --no-deps -d backend-production
 ```
+
+## Helpful Server Commands
+
+To start the CD server in a new process, run the following command:
+```bash
+sudo ./start.sh
+```
+
+To start the CD server in the current terminal, run the following command:
+```bash
+sudo go run . [SSH passphrase]
+```
+
+If you get a `command not found` error after that, run this command first:
+```bash
+chmod +x start.sh
+```
+

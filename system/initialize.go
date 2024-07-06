@@ -2,11 +2,8 @@ package system
 
 import (
 	"errors"
-	"fmt"
 	"github.com/joho/godotenv"
 	"os"
-	"path/filepath"
-	"strings"
 )
 
 var sshPassphrase string
@@ -44,25 +41,16 @@ func GetPort() string {
 	return port
 }
 
+// for testing
+func tryPath(path string) {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		println("Path does not exist: " + path)
+	} else {
+		println("Path exists: " + path)
+	}
+}
+
 func GetSSHKeyPath() string {
-	if _, err := os.Stat(sshKeyPath); os.IsNotExist(err) {
-		fmt.Printf("SSH key path %s does not exist.\n", sshKeyPath)
-	}
-
-	// Replace ~ with the home directory path
-	if strings.HasPrefix(sshKeyPath, "~") {
-		homeDir, err := os.UserHomeDir()
-		if err != nil {
-			//return errors.New("error retrieving home directory: " + err.Error())
-			println(err)
-		}
-		sshKeyPath = filepath.Join(homeDir, sshKeyPath[1:])
-	}
-
-	if _, err := os.Stat(sshKeyPath); os.IsNotExist(err) {
-		fmt.Printf("SSH key path %s does not exist.\n", sshKeyPath)
-	}
-
 	return sshKeyPath
 }
 
