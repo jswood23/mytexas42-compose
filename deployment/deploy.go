@@ -7,7 +7,7 @@ import (
 
 func deployAll() error {
 	println("Deploying full stack.")
-	err := system.Run("docker", "compose", "up", "-d")
+	err := system.Run("docker-compose", "up", "-d")
 
 	if err != nil {
 		return err
@@ -20,25 +20,25 @@ func deployAll() error {
 
 func deployEnvironment(environment string) error {
 	println(fmt.Sprintf("Deploying to %s.", environment))
-	err := system.Run("docker", fmt.Sprintf("compose", "build", "backend-%s", environment))
+	err := system.Run("docker-compose", "build", fmt.Sprintf("backend-%s", environment))
 
 	if err != nil {
 		return err
 	}
 
-	err = system.Run("docker", fmt.Sprintf("compose", "up", "--no-deps", "-d", "backend-%s", environment))
+	err = system.Run("docker-compose", "up", fmt.Sprintf("--no-deps", "-d", "backend-%s", environment))
 
 	if err != nil {
 		return err
 	}
 
-	err = system.Run("docker", fmt.Sprintf("compose", "build", "frontend-%s", environment))
+	err = system.Run("docker-compose", "build", fmt.Sprintf("frontend-%s", environment))
 
 	if err != nil {
 		return err
 	}
 
-	err = system.Run("docker", fmt.Sprintf("compose up --no-deps -d frontend-%s", environment))
+	err = system.Run("docker-compose", "up", "--no-deps", "-d", fmt.Sprintf("frontend-%s", environment))
 
 	if err != nil {
 		return err
