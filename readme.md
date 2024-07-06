@@ -47,3 +47,8 @@ If you get a `command not found` error after that, run this command first:
 chmod +x start.sh
 ```
 
+To start certbot for SSL, run the following command:
+```bash
+sudo certbot --nginx -d mytexas42.com -d www.mytexas42.com --config-dir /etc/letsencrypt --logs-dir /var/log/letsencrypt --work-dir /var/lib/letsencrypt
+``` 
+

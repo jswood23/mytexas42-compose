@@ -79,8 +79,17 @@ services:
       - frontend-production
       - frontend-staging
     volumes:
+      - ./nginx:/etc/nginx:ro
+      - ./nginx/webroot:/var/www/html
+  certbot:
+    image: certbot/certbot
+    volumes:
       - ./nginx/conf:/etc/nginx:ro
       - ./nginx/webroot:/var/www/html
+      - ./certificates:/etc/letsencrypt
+    depends_on:
+      - nginx
+    command: certonly --webroot --webroot-path=/var/www/html --email jwood@swood.org --agree-tos --no-eff-email -d mytexas42.com -d www.mytexas42.com
   
 
 volumes:
