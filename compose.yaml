@@ -66,6 +66,18 @@ services:
     ports:
         - ${FRONTEND_PRODUCTION_PORT}:3000
     restart: unless-stopped
+  nginx:
+    container_name: container-nginx
+    build: ./nginx
+    env_file:
+      - ./.env
+    ports:
+      - "80:80"
+    depends_on:
+      - backend-production
+      - backend-staging
+      - frontend-production
+      - frontend-staging
   
 
 volumes:
