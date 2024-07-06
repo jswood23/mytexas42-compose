@@ -78,6 +78,9 @@ services:
       - backend-staging
       - frontend-production
       - frontend-staging
+    volumes:
+      - ./nginx/conf:/etc/nginx:ro
+      - ./nginx/webroot:/var/www/html
   
 
 volumes:
