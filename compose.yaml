@@ -92,7 +92,7 @@ services:
       - ./certificates:/etc/letsencrypt
     depends_on:
       - nginx
-    command: certonly --webroot --webroot-path=/var/www/html --email jwood@swood.org --test-cert --agree-tos --no-eff-email --non-interactive --keep-until-expiring -d mytexas42.com -d www.mytexas42.com
+    command: certonly --webroot --webroot-path=/var/www/html --email jwood@swood.org --agree-tos --no-eff-email --non-interactive --keep-until-expiring -d mytexas42.com -d www.mytexas42.com
   
 
 volumes:
