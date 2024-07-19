@@ -57,3 +57,13 @@ To start certbot for SSL, run the following command:
 sudo certbot --nginx -d mytexas42.com -d www.mytexas42.com --config-dir /etc/letsencrypt --logs-dir /var/log/letsencrypt --work-dir /var/lib/letsencrypt
 ``` 
 
+To list all Docker volumes, run the following command:
+```bash
+sudo docker volume ls
+```
+
+To remove all Docker volumes, run the following command:
+```bash
+sudo docker volume prune
+```
+
