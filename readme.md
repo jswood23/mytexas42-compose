@@ -67,3 +67,8 @@ To remove all Docker volumes, run the following command:
 sudo docker volume prune
 ```
 
+To open a bash shell in a Docker container, run the following command:
+```bash
+sudo docker exec -it [container_name] bash
+```
+
