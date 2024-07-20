@@ -72,3 +72,8 @@ To open a bash shell in a Docker container, run the following command:
 sudo docker exec -it [container_name] bash
 ```
 
+If that doesn't work, try this command:
+```bash
+sudo docker exec -it [container_name] /bin/sh
+```
+
