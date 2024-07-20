@@ -96,4 +96,5 @@ services:
   
 
 volumes:
-  postgres-data:
+  postgres-staging-data:
+  postgres-production-data:
