@@ -9,7 +9,7 @@ services:
     ports:
       - ${POSTGRES_STAGING_PORT}:5432
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-staging-data:/var/lib/postgresql/data
     restart: unless-stopped
   db-production:
     container_name: container-pg-production
@@ -20,7 +20,7 @@ services:
     ports:
       - ${POSTGRES_PRODUCTION_PORT}:5432
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-production-data:/var/lib/postgresql/data
     restart: unless-stopped
   backend-staging:
     container_name: container-backend-staging
