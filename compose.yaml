@@ -3,7 +3,7 @@ services:
   db-staging:
     container_name: container-pg-staging
     build: ./postgres-build
-    hostname: ${HOST_NAME}
+    hostname: db-staging
     env_file:
       - ./.env
     ports:
@@ -14,7 +14,7 @@ services:
   db-production:
     container_name: container-pg-production
     build: ./postgres-build
-    hostname: ${HOST_NAME}
+    hostname: db-production
     env_file:
       - ./.env
     ports:
