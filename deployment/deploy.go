@@ -7,7 +7,7 @@ import (
 
 func deployAll() error {
 	println("Deploying full stack.")
-	err := system.Run("docker-compose", "up", "-d")
+	err := system.Run("docker-compose", "up", "--build", "-d")
 
 	if err != nil {
 		return err
