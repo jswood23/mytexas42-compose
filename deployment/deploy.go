@@ -26,7 +26,7 @@ func deployEnvironment(environment string) error {
 		return err
 	}
 
-	err = system.Run("docker-compose", "up", fmt.Sprintf("--no-deps", "-d", "backend-%s", environment))
+	err = system.Run("docker-compose", "up", fmt.Sprintf("--no-deps -d backend-%s", environment))
 
 	if err != nil {
 		return err
