@@ -51,7 +51,7 @@ services:
     env_file:
       - ./.env
     environment:
-      - ENVIRONMENT=staging
+      - REACT_APP_ENVIRONMENT=staging
     ports:
         - ${FRONTEND_STAGING_PORT}:3000
     restart: unless-stopped
@@ -62,7 +62,7 @@ services:
     env_file:
       - ./.env
     environment:
-        - ENVIRONMENT=production
+        - REACT_APP_ENVIRONMENT=production
     ports:
         - ${FRONTEND_PRODUCTION_PORT}:3000
     restart: unless-stopped
