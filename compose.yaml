@@ -92,7 +92,8 @@ services:
       - ./certificates:/etc/letsencrypt
     depends_on:
       - nginx
-    command: certonly --webroot --webroot-path=/var/www/html --email jwood@swood.org --agree-tos --no-eff-email --non-interactive --keep-until-expiring --expand -d mytexas42.com,www.mytexas42.com,app.mytexas42.com,www.app.mytexas42.com,staging-app.mytexas42.com,www.staging-app.mytexas42.com,api.mytexas42.com,www.api.mytexas42.com,staging-api.mytexas42.com,www.staging-api.mytexas42.com
+    command: certonly --webroot --webroot-path=/var/www/html --email jwood@swood.org --agree-tos --no-eff-email --non-interactive --force-renewal -d mytexas42.com,www.mytexas42.com,app.mytexas42.com,www.app.mytexas42.com,staging-app.mytexas42.com,www.staging-app.mytexas42.com,api.mytexas42.com,www.api.mytexas42.com,staging-api.mytexas42.com,www.staging-api.mytexas42.com
+    restart: unless-stopped
   
 
 volumes:
