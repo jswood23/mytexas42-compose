@@ -1,5 +1,5 @@
 # specify image name
-FROM postgres AS initdb
+FROM postgres:16 AS initdb
 
 RUN rm -rf /docker-entrypoint-initdb.d/*
 
