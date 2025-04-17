@@ -6,7 +6,7 @@ services:
     env_file:
       - ./.env
     ports:
-      - ${POSTGRES_STAGING_PORT}:5432
+      - ${POSTGRES_EXTERNAL_PORT}:5432
     volumes:
       - postgres-staging-data:/var/lib/postgresql/data
     restart: unless-stopped
