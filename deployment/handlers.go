@@ -66,6 +66,12 @@ func DeployAll(c *gin.Context) {
 	})
 }
 
+func DeployAllNoContext() {
+	_ = updateGit("staging")
+	_ = updateGit("production")
+	_ = deployAll()
+}
+
 func StopAll(c *gin.Context) {
 	err := checkPermissions(c)
 

@@ -21,6 +21,8 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
+	deployment.DeployAllNoContext()
+
 	r.GET("/health", getAppHealth)
 	r.GET("/deploy/staging", deployment.DeployStaging)
 	r.GET("/deploy/production", deployment.DeployProduction)
