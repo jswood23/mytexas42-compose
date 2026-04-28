@@ -45,23 +45,33 @@ services:
     restart: unless-stopped
   frontend-staging:
     container_name: container-frontend-staging
-    build: ${FRONTEND_STAGING_REPO}
+    build:
+      context: ${FRONTEND_STAGING_REPO}
+      args:
+        REACT_APP_ENVIRONMENT: staging
+        REACT_APP_DEV_API_PATH: ${REACT_APP_DEV_API_PATH}
+        REACT_APP_STAGING_API_PATH: ${REACT_APP_STAGING_API_PATH}
+        REACT_APP_PRODUCTION_API_PATH: ${REACT_APP_PRODUCTION_API_PATH}
+        REACT_APP_DEV_WEBSOCKET_API_PATH: ${REACT_APP_DEV_WEBSOCKET_API_PATH}
+        REACT_APP_STAGING_WEBSOCKET_API_PATH: ${REACT_APP_STAGING_WEBSOCKET_API_PATH}
+        REACT_APP_PRODUCTION_WEBSOCKET_API_PATH: ${REACT_APP_PRODUCTION_WEBSOCKET_API_PATH}
     hostname: ${HOST_NAME}
-    env_file:
-      - ./.env
-    environment:
-      - REACT_APP_ENVIRONMENT=staging
     ports:
         - ${FRONTEND_STAGING_PORT}:3000
     restart: unless-stopped
   frontend-production:
     container_name: container-frontend-production
-    build: ${FRONTEND_PRODUCTION_REPO}
+    build:
+      context: ${FRONTEND_PRODUCTION_REPO}
+      args:
+        REACT_APP_ENVIRONMENT: production
+        REACT_APP_DEV_API_PATH: ${REACT_APP_DEV_API_PATH}
+        REACT_APP_STAGING_API_PATH: ${REACT_APP_STAGING_API_PATH}
+        REACT_APP_PRODUCTION_API_PATH: ${REACT_APP_PRODUCTION_API_PATH}
+        REACT_APP_DEV_WEBSOCKET_API_PATH: ${REACT_APP_DEV_WEBSOCKET_API_PATH}
+        REACT_APP_STAGING_WEBSOCKET_API_PATH: ${REACT_APP_STAGING_WEBSOCKET_API_PATH}
+        REACT_APP_PRODUCTION_WEBSOCKET_API_PATH: ${REACT_APP_PRODUCTION_WEBSOCKET_API_PATH}
     hostname: ${HOST_NAME}
-    env_file:
-      - ./.env
-    environment:
-        - REACT_APP_ENVIRONMENT=production
     ports:
         - ${FRONTEND_PRODUCTION_PORT}:3000
     restart: unless-stopped
